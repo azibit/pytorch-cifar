@@ -117,7 +117,7 @@ if args.resume:
     best_acc = checkpoint['acc']
     start_epoch = checkpoint['epoch']
 
-dataset_list = glob.glob(args.dataset_dir + "/*")
+dataset_list = sorted(glob.glob(args.dataset_dir + "/*"))
 dataset_test_dir = dataset_list[0]
 dataset_list = dataset_list[1:]
 print("The datasets are: ", dataset_list)
