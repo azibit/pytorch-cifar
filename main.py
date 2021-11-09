@@ -27,7 +27,7 @@ parser.add_argument('--trials', default=5, type=int,
                     help='Number of times to run the complete experiment')
 parser.add_argument('--iterations', default=6, type=int,
                     help='Number of times to run the complete experiment')
-parser.add_argument('--epochs', default=2, type=int,
+parser.add_argument('--epochs', default=200, type=int,
                     help='total epochs to run')
 args = parser.parse_args()
 
@@ -117,7 +117,9 @@ if args.resume:
     best_acc = checkpoint['acc']
     start_epoch = checkpoint['epoch']
 
-dataset_list = glob.glob(args.dataset_dir + "/*")[2:4]
+dataset_list = glob.glob(args.dataset_dir + "/*")
+print("The datasets are: ", dataset_list)
+sys.exit()
 
 for dataset in dataset_list:
     for iteration in range(args.iterations):
