@@ -117,10 +117,11 @@ if args.resume:
     best_acc = checkpoint['acc']
     start_epoch = checkpoint['epoch']
 
-dataset_list = glob.glob(args.dataset_dir + "/*")[1:]
+dataset_list = glob.glob(args.dataset_dir + "/*")
 dataset_test_dir = dataset_list[0]
-print("The datasets are: ", )
-sys.exit()
+dataset_list = dataset_list[1:]
+print("The datasets are: ", dataset_list)
+
 
 for dataset in dataset_list:
     for iteration in range(args.iterations):
@@ -157,7 +158,7 @@ for dataset in dataset_list:
         #            'dog', 'frog', 'horse', 'ship', 'truck')
 
         for trial in range(args.trials):
-            print("Working on dataset: ", dataset, " in iteration ", iteration, " and trial ", trial)
+            print("Working on dataset: ", dataset, " in iteration ", iteration, " and model ", trial)
             for epoch in range(args.epochs):
                 train(epoch, trainloader)
                 test(epoch, testloader)
@@ -165,5 +166,5 @@ for dataset in dataset_list:
 
                 with open(current_dataset_file, 'a') as f:
                     if epoch + 1 == args.epochs:
-                        print("Test result for iteration ", iteration, " experiment: ", trial, file = f)
+                        print("Test result for iteration ", iteration, " model: ", trial, file = f)
                         print(make_prediction(net, testset.classes, testloader, 'save'), file = f)
