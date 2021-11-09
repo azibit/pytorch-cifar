@@ -117,8 +117,9 @@ if args.resume:
     best_acc = checkpoint['acc']
     start_epoch = checkpoint['epoch']
 
-dataset_list = glob.glob(args.dataset_dir + "/*")
-print("The datasets are: ", dataset_list)
+dataset_list = glob.glob(args.dataset_dir + "/*")[1:]
+dataset_test_dir = dataset_list[0]
+print("The datasets are: ", )
 sys.exit()
 
 for dataset in dataset_list:
@@ -131,7 +132,7 @@ for dataset in dataset_list:
         trainloader = torch.utils.data.DataLoader(
             trainset, batch_size=128, shuffle=True, num_workers=2)
 
-        testset = datasets.ImageFolder(os.path.join(dataset, 'test'),
+        testset = datasets.ImageFolder(os.path.join(dataset_test_dir, 'test'),
                                               transform_test)
         testloader = torch.utils.data.DataLoader(
             testset, batch_size=100, shuffle=False, num_workers=2)
